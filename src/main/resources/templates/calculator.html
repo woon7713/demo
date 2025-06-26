@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome한 계산기</title>
+    <style>
+        @font-face {
+            font-family: 'Galmuri11-Condensed';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/Galmuri11-Condensed.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: Galmuri11-Condensed;
+            background-color: lightgray;
+        }
+
+        .calculator-box {
+            width: 400px;
+            margin: 50px auto; /* 수직 여백 + 가운데 정렬 */
+            text-align: center;
+            background-color: darkolivegreen;
+            border-radius: 20px;
+            box-shadow: 10px 15px 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: inline-block;
+            width: 70px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .Operation {
+            display: inline-block;
+            text-align: right;
+            margin-bottom: 120px;
+        }
+
+        input, select, button{
+            border: none;
+        }
+
+        .result, .error{
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+
+        }
+
+        .result {
+            background-color: #e7f3fe;
+            color: #31708f;
+        }
+
+        .error{
+            color: darkred;
+        }
+        button {
+            background-color: #f7ff00;
+            color: #db36a4;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div class="calculator-box">
+    <h1>Awesome한 계산기</h1>
+    <form th:action="@{/calculate}" method="post">
+        <div class="form-group">
+
+
+            <label for="num1">Number 1:</label>
+            <input type="number" step="any" id="num1" name="num1"/>
+        </div>
+
+        <div class="form-group">
+            <label for="num2">Number 2:</label>
+            <input type="number" step="any" id="num2" name="num2"/>
+        </div>
+
+        <div class="Operation">
+            <label for="operation">Operation: </label>
+            <select id="operation" name="operation">
+                <option value="add">Add (+)</option>
+                <option value="subtract">Subtract (-)</option>
+                <option value="multiply">Multiply (×)</option>
+                <option value="divide">Divide (÷)</option>
+            </select>
+
+            <button type="submit" style="font-family: Galmuri11-Condensed">Calculate</button></div>
+    </form>
+
+</div>
+
+<div th:if="${errorMessage}" class="error" style="color: red">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<div th:if="${result}" class="result">
+    <h2>Result: <span th:text="${result}"></span></h2>
+</div>
+
+</body>
+</html>
